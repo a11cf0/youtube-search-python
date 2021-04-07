@@ -4,7 +4,7 @@ import asyncio
 import httpx
 try:
     from youtubesearchpython.__future__.internal.json import loads
-    from pytube.__main__ import apply_descrambler, apply_signature
+    from pytube.extract import apply_descrambler, apply_signature
     from pytube import YouTube, extract
     from urllib.parse import parse_qs
     isPyTubeInstalled = True
@@ -92,7 +92,7 @@ class StreamURLFetcherInternal(YouTube):
             loop = asyncio.get_running_loop()
             await loop.run_in_executor(None, apply_descrambler, self._player_response, 'url_encoded_fmt_stream_map')
             await loop.run_in_executor(None, apply_signature, self._player_response, 'url_encoded_fmt_stream_map', self._js)
-            
+
         except:
             '''
             Fetch updated player JavaScript to get new cipher algorithm.
